@@ -66,7 +66,10 @@ typedef struct specifier
 
 int _printf(const char *format, ...);
 int _strlen(char *s);
-print_int((va_arg(args, int)), count);
-print_char((va_arg(args, int)), count);
-print_string((va_arg(args, char*)), count)
+int print_char(char a, int count);
+int print_string(char *a, int count);
+int print_int(int num, int count);
+int power(int base, int pow)
+
+
 #endif
