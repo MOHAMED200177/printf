@@ -39,10 +39,6 @@ int _printf(const char *format, ...)
 				case 's':
 					count = print_string((va_arg(args, char*)), count);
 					break;
-				case 'i':
-				case 'd':
-					count = print_int((va_arg(args, int)), count);
-					break;
 			}
 		}
 	}
