@@ -12,9 +12,6 @@ int _printf(const char *format, ...);
 int _strlen(char *s);
 int print_char(char a, int count);
 int print_string(char *a, int count);
-int print_int(int num, int count);
-int power(int base, int pow);
-
-
+int _putchar(char c);
 
 #endif

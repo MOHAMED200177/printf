@@ -8,7 +8,7 @@
  */
 int print_char(char a, int count)
 {
-	putchar(a);
+	_putchar(a);
 	count++;
 	return (count);
 }
@@ -31,7 +31,7 @@ int print_string(char *a, int count)
 	{
 		while (a[i] != '\0')
 		{
-			putchar(a[i]);
+			_putchar(a[i]);
 			i++;
 			count++;
 		}
