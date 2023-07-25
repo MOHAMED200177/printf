@@ -96,7 +96,6 @@ int sFunction(va_list args, params_t *params);
 /* numbers2.c module */
 int _isdigit(int c);
 int _strlen(char *s);
-<<<<<<< HEAD
 int returnNum(char *str, params_t *params);
 int returnNum1(char *str, params_t *params);
 int returnNum2(char *str, params_t *params);
@@ -113,12 +112,7 @@ int printFlag(char *s, params_t *params);
 int printModifire(char *s, params_t *params);
 char *printWidth(char *s, params_t *params, va_list args);
 
-/* string_fields.c  */
-char *printPrecision(char *p, params_t *params, va_list args)
-=======
-int print_char(char a, int count);
-int print_string(char *a, int count);
-int _putchar(char c);
->>>>>>> d6be6325f5df6a0b016376d48c9e94f00b73aa5e
-
 #endif
+
+
+
