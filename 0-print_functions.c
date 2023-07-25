@@ -1,16 +1,16 @@
 #include "main.h"
 
 /**
- * returnChar - prints character
- * @args: argument pointer
+ * print_char - prints character
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: number chars printed
  */
-int returnChar(va_list args, params_t *params)
+int print_char(va_list ap, params_t *params)
 {
 	char pad_char = ' ';
-	unsigned int pad = 1, sum = 0, ch = va_arg(args, int);
+	unsigned int pad = 1, sum = 0, ch = va_arg(ap, int);
 
 	if (params->minus_flag)
 		sum += _putchar(ch);
@@ -22,35 +22,35 @@ int returnChar(va_list args, params_t *params)
 }
 
 /**
- * returnInt - prints integer
- * @args: argument pointer
+ * print_int - prints integer
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: number chars printed
  */
-int returnInt(va_list args, params_t *params)
+int print_int(va_list ap, params_t *params)
 {
 	long l;
 
 	if (params->l_modifier)
-		l = va_arg(args, long);
+		l = va_arg(ap, long);
 	else if (params->h_modifier)
-		l = (short int)va_arg(args, int);
+		l = (short int)va_arg(ap, int);
 	else
-		l = (int)va_arg(args, int);
+		l = (int)va_arg(ap, int);
 	return (print_number(convert(l, 10, 0, params), params));
 }
 
 /**
- * returnStr - prints string
- * @args: argument pointer
+ * print_string - prints string
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: number chars printed
  */
-int returnStr(va_list args, params_t *params)
+int print_string(va_list ap, params_t *params)
 {
-	char *str = va_arg(args, char *), pad_char = ' ';
+	char *str = va_arg(ap, char *), pad_char = ' ';
 	unsigned int pad = 0, sum = 0, i = 0, j;
 
 	(void)params;
@@ -84,29 +84,29 @@ int returnStr(va_list args, params_t *params)
 }
 
 /**
- * returnPercent - prints string
- * @args: argument pointer
+ * print_percent - prints string
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: number chars printed
  */
-int returnPercent(va_list args, params_t *params)
+int print_percent(va_list ap, params_t *params)
 {
-	(void)args;
+	(void)ap;
 	(void)params;
 	return (_putchar('%'));
 }
 
 /**
- * sFunction - custom format specifier
- * @args: argument pointer
+ * print_S - custom format specifier
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: number chars printed
  */
-int sFunction(va_list args, params_t *params)
+int print_S(va_list ap, params_t *params)
 {
-	char *str = va_arg(args, char *);
+	char *str = va_arg(ap, char *);
 	char *hex;
 	int sum = 0;
 

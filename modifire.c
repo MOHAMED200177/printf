@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * printSpecifier - finds the format func
+ * get_specifier - finds the format func
  * @s: the format string
  *
  * Return: the number of bytes printed
  */
-int (*printSpecifier(char *s))(va_list args, params_t *params)
+int (*get_specifier(char *s))(va_list ap, params_t *params)
 {
 	specifier_t specifiers[] = {
 		{"c", print_char},
@@ -41,28 +41,28 @@ int (*printSpecifier(char *s))(va_list args, params_t *params)
 /**
  * get_print_func - finds the format func
  * @s: the format string
- * @args: argument pointer
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: the number of bytes printed
  */
-int get_print_func(char *s, va_list args, params_t *params)
+int get_print_func(char *s, va_list ap, params_t *params)
 {
-	int (*f)(va_list, params_t *) = printSpecifier(s);
+	int (*f)(va_list, params_t *) = get_specifier(s);
 
 	if (f)
-		return (f(args, params));
+		return (f(ap, params));
 	return (0);
 }
 
 /**
- * printFlag - finds the flag func
+ * get_flag - finds the flag func
  * @s: the format string
  * @params: the parameters struct
  *
  * Return: if flag was valid
  */
-int printFlag(char *s, params_t *params)
+int get_flag(char *s, params_t *params)
 {
 	int i = 0;
 
@@ -88,13 +88,13 @@ int printFlag(char *s, params_t *params)
 }
 
 /**
- * printModifire - finds the modifier func
+ * get_modifier - finds the modifier func
  * @s: the format string
  * @params: the parameters struct
  *
  * Return: if modifier was valid
  */
-int printModifire(char *s, params_t *params)
+int get_modifier(char *s, params_t *params)
 {
 	int i = 0;
 
@@ -111,20 +111,20 @@ int printModifire(char *s, params_t *params)
 }
 
 /**
- * printWidth - gets the width from the format string
+ * get_width - gets the width from the format string
  * @s: the format string
  * @params: the parameters struct
- * @args: the argument pointer
+ * @ap: the argument pointer
  *
  * Return: new pointer
  */
-char *printWidth(char *s, params_t *params, va_list args)
+char *get_width(char *s, params_t *params, va_list ap)
 {
 	int d = 0;
 
 	if (*s == '*')
 	{
-		d = va_arg(args, int);
+		d = va_arg(ap, int);
 		s++;
 	}
 	else

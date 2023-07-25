@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _puts - prints a string with newline
  * @str: the string to print
@@ -35,4 +36,3 @@ int _putchar(int c)
 		buf[i++] = c;
 	return (1);
 }
-

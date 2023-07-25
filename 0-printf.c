@@ -9,11 +9,11 @@
 int _printf(const char *format, ...)
 {
 	int sum = 0;
-	va_list args;
+	va_list ap;
 	char *p, *start;
 	params_t params = PARAMS_INIT;
 
-	va_start(args, format);
+	va_start(ap, format);
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 		return (-1);
 	for (p = (char *)format; *p; p++)
 	{
-		init_params(&params, args);
+		init_params(&params, ap);
 		if (*p != '%')
 		{
 			sum += _putchar(*p);
@@ -29,21 +29,21 @@ int _printf(const char *format, ...)
 		}
 		start = p;
 		p++;
-		while (printFlag(p, &params)) /* while char at p is flag char */
+		while (get_flag(p, &params)) /* while char at p is flag char */
 		{
 			p++; /* next char */
 		}
-		p = printWidth(p, &params, args);
-		p = printPrecision(p, &params, args);
-		if (printModifire(p, &params))
+		p = get_width(p, &params, ap);
+		p = get_precision(p, &params, ap);
+		if (get_modifier(p, &params))
 			p++;
-		if (!printSpecifier(p))
+		if (!get_specifier(p))
 			sum += print_from_to(start, p,
 				params.l_modifier || params.h_modifier ? p - 1 : 0);
 		else
-			sum += returnFromTo(p, args, &params);
+			sum += get_print_func(p, ap, &params);
 	}
 	_putchar(BUF_FLUSH);
-	va_end(args);
+	va_end(ap);
 	return (sum);
 }
