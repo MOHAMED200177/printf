@@ -1,49 +1,49 @@
 #include "main.h"
-#include <string.h>
+
 /**
- * _printf - function to print any datatype
- *
- * @format: pointer to the format string
+ * _printf - prints anything
+ * @format: the format string
  *
  * Return: number of bytes printed
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0; /*indicator*/
-	int count = 0;/*counter*/
+	int sum = 0;
 	va_list args;
+	char *p, *start;
+	params_t params = PARAMS_INIT;
 
-	/*intial check*/
+	va_start(args, format);
+
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-
-	va_start(args, format);
-	for (i = 0; i < strlen(format); i++)
+	for (p = (char *)format; *p; p++)
 	{
-		while (format[i] && format[i] != '%')
+		init_params(&params, args);
+		if (*p != '%')
 		{
-			putchar(format[i]);
-			i++;
-			count++;
+			sum += _putchar(*p);
+			continue;
 		}
-		if (format[i] == '%')
+		start = p;
+		p++;
+		while (printFlag(p, &params)) /* while char at p is flag char */
 		{
-			i++;
-			switch (format[i])
-			{
-				case 'c':
-					count = print_char((va_arg(args, int)), count);
-					break;
-				case 's':
-					count = print_string((va_arg(args, char*)), count);
-					break;
-			}
+			p++; /* next char */
 		}
+		p = printWidth(p, &params, args);
+		p = printPrecision(p, &params, args);
+		if (printModifire(p, &params))
+			p++;
+		if (!printSpecifier(p))
+			sum += print_from_to(start, p,
+				params.l_modifier || params.h_modifier ? p - 1 : 0);
+		else
+			sum += returnFromTo(p, args, &params);
 	}
+	_putchar(BUF_FLUSH);
 	va_end(args);
-	return (count);
-
+	return (sum);
 }
-
