@@ -1,15 +1,14 @@
 #include "main.h"
 
 /**
- * printPrecision - gets the precision from the format string
+ * get_precision - gets the precision from the format string
  * @p: the format string
  * @params: the parameters struct
- * @args: input
- *: the argument pointer
+ * @ap: the argument pointer
  *
  * Return: new pointer
  */
-char *printPrecision(char *p, params_t *params, va_list args)
+char *get_precision(char *p, params_t *params, va_list ap)
 {
 	int d = 0;
 
@@ -18,8 +17,7 @@ char *printPrecision(char *p, params_t *params, va_list args)
 	p++;
 	if (*p == '*')
 	{
-		d = va_arg(args
-	, int);
+		d = va_arg(ap, int);
 		p++;
 	}
 	else

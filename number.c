@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * convertNum - converter function, a clone of itoa
+ * convert - converter function, a clone of itoa
  * @num: number
  * @base: base
  * @flags: argument flags
@@ -9,7 +9,7 @@
  *
  * Return: string
  */
-char *convertNum(long int num, int base, int flags, params_t *params)
+char *convert(long int num, int base, int flags, params_t *params)
 {
 	static char *array;
 	static char buffer[50];
@@ -39,44 +39,44 @@ char *convertNum(long int num, int base, int flags, params_t *params)
 }
 
 /**
- * printUnsigned - prints unsigned integer numbers
- * @args: argument pointer
+ * print_unsigned - prints unsigned integer numbers
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: bytes printed
  */
-int printUnsigned(va_list args, params_t *params)
+int print_unsigned(va_list ap, params_t *params)
 {
 	unsigned long l;
 
 	if (params->l_modifier)
-		l = (unsigned long)va_arg(args, unsigned long);
+		l = (unsigned long)va_arg(ap, unsigned long);
 	else if (params->h_modifier)
-		l = (unsigned short int)va_arg(args, unsigned int);
+		l = (unsigned short int)va_arg(ap, unsigned int);
 	else
-		l = (unsigned int)va_arg(args, unsigned int);
+		l = (unsigned int)va_arg(ap, unsigned int);
 	params->unsign = 1;
-	return (print_number(convertNum(l, 10, CONVERT_UNSIGNED, params), params));
+	return (print_number(convert(l, 10, CONVERT_UNSIGNED, params), params));
 }
 
 
 
 /**
- * printAddress - prints address
- * @args: argument pointer
+ * print_address - prints address
+ * @ap: argument pointer
  * @params: the parameters struct
  *
  * Return: bytes printed
  */
-int printAddress(va_list args, params_t *params)
+int print_address(va_list ap, params_t *params)
 {
-	unsigned long int n = va_arg(args, unsigned long int);
+	unsigned long int n = va_arg(ap, unsigned long int);
 	char *str;
 
 	if (!n)
 		return (_puts("(nil)"));
 
-	str = convertNum(n, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
+	str = convert(n, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
 	*--str = 'x';
 	*--str = '0';
 	return (print_number(str, params));

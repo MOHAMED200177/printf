@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * countParams - clears struct fields and reset buf
+ * init_params - clears struct fields and reset buf
  * @params: the parameters struct
- * @args: the argument pointer
+ * @ap: the argument pointer
  *
  * Return: void
  */
-void countParams(params_t *params, va_list args)
+void init_params(params_t *params, va_list ap)
 {
 	params->unsign = 0;
 
@@ -22,5 +22,5 @@ void countParams(params_t *params, va_list args)
 
 	params->h_modifier = 0;
 	params->l_modifier = 0;
-	(void)args;
+	(void)ap;
 }
